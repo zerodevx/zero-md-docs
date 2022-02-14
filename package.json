@@ -1,6 +1,6 @@
 {
   "name": "zero-md-docs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Instantly publish markdown from your Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "type": "module",

@@ -10,6 +10,7 @@ Features:
 
 Todos:
 
+- [ ] Definitely improve docs
 - [ ] Document theming and contributing
 - [ ] Improve developer tooling
 - [ ] Perhaps make `tailwindcss` first-class
@@ -39,7 +40,6 @@ Write `readme.md` files into your `/docs` directory like so:
     │   └── readme.md
     └── readme.md
 ```
-
 
 ### Create a config file
 
@@ -103,15 +103,14 @@ Add the HTML snippet into `<head>` like so:
 
 ```js
 module.exports = {
-  head: `
-<!-- Global site tag (gtag.js) - Google Analytics -->
+  head: `<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXXXXX');
-<\/script>`,
+</script>`,
   header: '',
   footer: '',
   ...  
