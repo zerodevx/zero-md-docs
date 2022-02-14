@@ -1,0 +1,37 @@
+{
+  "name": "zero-md-docs",
+  "version": "0.1.0",
+  "description": "Instantly publish markdown from your Github docs folder",
+  "author": "Jason Lee <jason@zerodevx.com>",
+  "type": "module",
+  "exports": "./index.js",
+  "bin": {
+    "zero-md-docs": "./cli.js"
+  },
+  "scripts": {
+    "dev": "node serve"
+  },
+  "dependencies": {
+    "cosmiconfig": "^7.0.1",
+    "ejs": "^3.1.6"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.7"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "files": [
+    "index.js",
+    "cli.js",
+    "template/"
+  ],
+  "license": "ISC",
+  "repository": "github:zerodevx/zero-md-docs",
+  "keywords": [
+    "api-documentation-tool",
+    "markdown-to-html",
+    "ejs-templates",
+    "zero-md"
+  ]
+}
