@@ -2,11 +2,21 @@
 
 > Instantly publish markdown from your Github docs folder
 
+Elegantly leverage your Github `docs/` directory to host a Github Pages website. This
+project builds and places `index.html` files into `docs/**` folders, turning them into
+a progressive web app that dynamically loads and displays each `readme.md` file when
+accessed.
+
+This gives a clean experience for your users: users can view nicely formatted `readme.md`
+markdown from both Github UI and from your public-facing site; changes to markdown is
+reflected immediately without a rebuild; and you avoid polluting your git history with
+tons of build commits.
+
 Features:
 
 - [x] Build once, run forever
 - [x] Progressive web app
-- [x] Minimal configuration
+- [x] Zero-config (almost)
 
 Todos:
 
@@ -25,9 +35,9 @@ Todos:
 $ npm i -g zero-md-docs
 ```
 
-### Stucture your docs
+### Structure your docs
 
-Write `readme.md` files into your `/docs` directory like so:
+Write `readme.md` files into your `docs/` directory like so:
 
 ```
 .
@@ -50,11 +60,11 @@ module.exports = {
   head: '',               // HTML string added into start of `<head>`
   header: '',             // HTML string added to start of `<body>`
   footer: '',             // HTML string added to end of `<body>`
-  links: [                // Array of navigation links
-    { title: 'Foo', href: '/repo/foo', dir: 'docs/foo' }
-    { title: 'Bar', href: '/repo/bar', dir: 'docs/bar' }
-    { title: 'Menu Item', href: '/repo/menu-item', dir: 'docs/menu-item' }
-    ...
+  links: [                
+    { title: 'Overview', href: '/repo/', dir: 'docs' } // Array of navigation links
+    { title: 'Foo', href: '/repo/foo/', dir: 'docs/foo' }
+    { title: 'Bar', href: '/repo/bar/', dir: 'docs/bar' }
+    { title: 'Menu Item', href: '/repo/menu-item/', dir: 'docs/menu-item' }
   ],
   _template: 'default',   // Use the `default` template
   _title: ''              // Dummy placeholder (required)
@@ -119,7 +129,7 @@ module.exports = {
 
 ## Contributing
 
-WIP
+Development docs are a WIP but looking for theme contributions.
 
 ## License
 
