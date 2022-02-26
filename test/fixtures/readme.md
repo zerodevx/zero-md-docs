@@ -9,7 +9,7 @@ highlighting - automagically rendering into its own self-contained shadow DOM co
 implementation details into one embarassingly easy-to-use package.
 
 **NOTE: This is documentation for V2. If you're looking for the older version, see the
-[V1 docs](https://zerodevx.github.io/zero-md/v1/).**
+[V1 docs](/docs/v1/).**
 
 Featuring:
 
