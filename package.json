@@ -13,16 +13,11 @@
   },
   "dependencies": {
     "cosmiconfig": "^7.0.1",
-    "ejs": "^3.1.7"
+    "ejs": "^3.1.8"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.9"
+    "browser-sync": "^2.27.10"
   },
-  "overrides": {
-    "browser-sync": {
-      "portscanner": "2.2.0"
-    }
-  },  
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
