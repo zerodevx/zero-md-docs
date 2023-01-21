@@ -1,6 +1,6 @@
 {
   "name": "zero-md-docs",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Instantly publish markdown from your Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "type": "module",
@@ -12,11 +12,11 @@
     "dev": "node serve"
   },
   "dependencies": {
-    "cosmiconfig": "^7.0.1",
+    "cosmiconfig": "^8.0.0",
     "ejs": "^3.1.8"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.10"
+    "browser-sync": "^2.27.11"
   },
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
