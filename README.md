@@ -1,133 +1,78 @@
 # zero-md-docs
 
-> Instantly publish markdown from your Github docs folder
+> Instantly publish markdown from Github docs folder
 
-Elegantly leverage your Github `docs/` directory to host a Github Pages website. This project builds
-and places `index.html` files into `docs/**` folders, turning them into a progressive web app that
-dynamically loads and displays each `readme.md` file when accessed.
-
-This gives a clean experience for your users: users can view nicely formatted `readme.md` markdown
-from both Github UI and from your public-facing site; changes to markdown is reflected immediately
-without a rebuild; and you avoid polluting your git history with tons of build commits.
+Elegantly leverage your Github `docs/` folder to host a Github Pages static site using just markdown
+files. This gives a clean experience for your users: users can view nicely formatted docs from both
+the Github UI, and from your public-facing static site, synchronised. Edits are published
+immediately without a rebuild, and you avoid polluting your git history with tons of commits.
 
 Features:
 
-- [x] Build once, run forever
-- [x] Progressive web app
-- [x] Zero-config (almost)
+- [x] Install once, use forever
+- [x] Single page app
+- [x] Zero-config
 
-Todos:
-
-- [ ] Definitely improve docs
-- [ ] Document theming and contributing
-- [ ] Improve developer tooling
-- [ ] Perhaps make `tailwindcss` first-class
-- [ ] Add more templates
-- [ ] Add CLI `init`, `build` and `preview` commands
+Inspired by [docsify](https://docsify.js.org)!
 
 ## Usage
 
-### Install
-
-```
-$ npm i -g zero-md-docs
-```
-
 ### Structure your docs
 
-Write `readme.md` files into your `docs/` directory like so:
+Setup `docs/` folder like so:
 
 ```
 .
 └── docs/
-    ├── foo/
-    │   └── readme.md
-    ├── bar/
-    │   └── readme.md
-    ├── menu-item/
-    │   └── readme.md
-    └── readme.md
+    ├── readme.md               # Homepage (always named `readme.md`)
+    ├── index.html              # Copy from template
+    ├── getting-started.md      # Another page
+    └── configuration.md        # Yet another page
 ```
 
-### Create a config file
+### Create `index.html`
 
-Initialise a `zmdocs.config.cjs` file in project root with configs like so:
+Copy and paste the following `index.html` into `docs/` folder:
 
-```js
-module.exports = {
-  head: '',               // HTML string added into start of `<head>`
-  header: '',             // HTML string added to start of `<body>`
-  footer: '',             // HTML string added to end of `<body>`
-  links: [
-    { title: 'Overview', href: '/repo/', dir: 'docs' } // Array of navigation links
-    { title: 'Foo', href: '/repo/foo/', dir: 'docs/foo' }
-    { title: 'Bar', href: '/repo/bar/', dir: 'docs/bar' }
-    { title: 'Menu Item', href: '/repo/menu-item/', dir: 'docs/menu-item' }
-  ],
-  _template: 'default',   // Use the `default` template
-  _title: ''              // Dummy placeholder (required)
-}
-```
+```html
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-### Build the docs
+    <!-- Define site links -->
+    <script>
+      window.ZeroMdDocsConfig = {
+        links: [
+          ['Home', 'readme.md'],
+          ['Getting Started', 'getting-started.md'],
+          ['Configuration', 'configuration.md'],
+          ['External Link Example', 'https://example.com']
+        ]
+      }
+    </script>
 
-```
-$ zero-md-docs
+    <!-- Import `zero-md` -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3"></script>
+
+    <!-- Import `zero-md-docs` -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md-docs@1"></script>
+
+    <!-- Import default stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zero-md-docs@1/dist/default.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
 ```
 
 ### Publish with Github Pages
 
-From your Github repo page, go to Setting -> Pages -> Source -> Select `/docs`, then Save. That's
-it! Your site is now available at `https://<username>.github.io/<repo>/`.
-
-## Recommendations
-
-### Generate sitemap
-
-Install [`static-sitemap-cli`](https://github.com/zerodevx/static-sitemap-cli).
-
-```
-$ npm i -g static-sitemap-cli
-```
-
-Then generate the sitemaps with:
-
-```
-$ sscli -b https://<username>.github.io/<repo> -r docs --slash
-```
-
-### Add a favicon
-
-Just copy your `favicon.ico` file into the `/docs` folder.
-
-### Add analytics
-
-Most modern analytics platforms support Single-Page Apps by automatically hooking into the `History`
-API and listening for changes - in which case a `pageview` event is sent.
-
-Add the HTML snippet into `<head>` like so:
-
-`zmdocs.config.cjs`
-
-```js
-module.exports = {
-  head: `<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>`,
-  header: '',
-  footer: '',
-  ...
-}
-```
-
-## Contributing
-
-Development docs are a WIP but looking for theme contributions.
+From your Github repo page, go to `Setting > Pages > Source > Deploy from a branch`, then select
+`/docs` folder.Save! Your site is now available at `https://<username>.github.io/<repo>/`.
 
 ## License
 
