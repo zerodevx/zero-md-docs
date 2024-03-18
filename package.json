@@ -1,12 +1,11 @@
 {
   "name": "zero-md-docs",
-  "version": "1.0.0",
+  "version": "1.0.0-next.1",
   "description": "Instantly publish markdown from Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "vite -c vite.config.js src",
+    "build": "npm run lint && vite build && cd dist && rm *.* && mv assets/*.js index.js && mv assets/*.css default.css && rmdir assets",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint src/**/*.js"
   },
@@ -16,15 +15,17 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.35.1",
-    "postcss": "^8.4.35",
+    "postcss": "^8.4.36",
     "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.2.2",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "svelte": "^4.2.12",
     "tailwindcss": "^3.4.1",
     "vite": "^5.1.6"
   },
   "type": "module",
   "exports": "./dist/index.js",
+  "jsdelivr": "./dist/index.js",
   "files": [
     "dist"
   ],
