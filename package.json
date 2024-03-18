@@ -4,7 +4,7 @@
   "description": "Instantly publish markdown from Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "scripts": {
-    "dev": "vite -c vite.config.js src",
+    "dev": "vite",
     "build": "npm run lint && vite build && cd dist && rm *.* && mv assets/*.js index.js && mv assets/*.css default.css && rmdir assets",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint src/**/*.js"
