@@ -1,11 +1,12 @@
 {
   "name": "zero-md-docs",
-  "version": "1.0.0-next.1",
+  "version": "1.0.0-next.3",
   "description": "Instantly publish markdown from Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "scripts": {
     "dev": "vite",
-    "build": "npm run lint && vite build && cd dist && rm *.* && mv assets/*.js index.js && mv assets/*.css default.css && rmdir assets",
+    "build": "npm run lint && vite build && npm run build:transform && npx publint",
+    "build:transform": "cd dist && rm *.* && mv assets/*.js index.js && mv assets/*.css default.css && rmdir assets",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint src/**/*.js"
   },
@@ -34,7 +35,6 @@
   "keywords": [
     "api-documentation-tool",
     "markdown-to-html",
-    "ejs-templates",
     "zero-md"
   ]
 }
