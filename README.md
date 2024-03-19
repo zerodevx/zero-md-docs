@@ -30,7 +30,7 @@ Setup `docs/` folder like so:
     └── configuration.md        # Yet another page
 ```
 
-### Create `index.html`
+### Create `index.html` and define site links
 
 Copy and paste the following `index.html` into `docs/` folder:
 
