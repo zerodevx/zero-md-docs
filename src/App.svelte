@@ -1,19 +1,17 @@
 <script>
-ZeroMdDocsConfig = ZeroMdDocsConfig || { links: [['Home', 'readme.md']] }
-const { links } = ZeroMdDocsConfig
 const baseUrl = location.origin + location.pathname
+const paramName = 'a'
+let links = []
+let title = ''
+let src = ''
+let ready = false
 
-function setSrc() {
-  const url = new URL(location.href)
-  const file = url.searchParams.get('p') || 'readme.md'
-  const entry = links.find((i) => i[1] === file)
-  if (entry) {
-    const [tit, file, alt] = entry
-    title = alt || tit || 'Home'
-    src = file
-  } else {
-    title = '404'
-    src = ''
+function load() {
+  const file = new URLSearchParams(location.search).get(paramName) || links[0][1]
+  ;[title, src] = links.find((i) => i[1] === file) || ['404', '']
+  const active = 'font-bold'
+  for (const link of links) {
+    link[1] === file ? link[2].classList.add(active) : link[2].classList.remove(active)
   }
 }
 
@@ -22,51 +20,54 @@ function clicked(e) {
   if (a && a.href.startsWith(baseUrl) && a.href.endsWith('.md')) {
     e.preventDefault()
     const url = new URL(location.href)
-    const file = a.href.split('/').pop()
-    file === 'readme.md' ? url.searchParams.delete('p') : url.searchParams.set('p', file)
-    title = e.target.getAttribute('data-title') || e.target.text
-    history.pushState({ title }, '', url.toString())
+    const file = a.href.split(baseUrl)[1]
+    file === links[0][1]
+      ? url.searchParams.delete(paramName)
+      : url.searchParams.set(paramName, file)
+    history.pushState({}, '', url.toString())
+    load()
     scrollTo(0, 0)
-    src = file
   }
 }
 
-let title = ''
-let src = ''
-setSrc()
+async function init(e) {
+  links = Array.from(e.target.querySelectorAll('a')).map((a) => [
+    a.text,
+    a.href.split(baseUrl)[1],
+    a
+  ])
+  load()
+  ready = true
+}
 </script>
 
-<svelte:window on:popstate={setSrc} on:click={clicked} />
+<svelte:window on:popstate={load} on:click={clicked} />
 
 <svelte:head>
   <title>{title}</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@next"></script>
 </svelte:head>
 
 <div class="zmdocs-container">
-  <ul class="zmdocs-menu">
-    {#each links as [title, href, alt]}
-      <li>
-        <a
-          class="zmdocs-link"
-          class:font-bold={href.split('/').pop() === src}
-          data-title={alt}
-          {href}>{title}</a
-        >
-      </li>
-    {/each}
-  </ul>
-  <div class="zmdocs-content">
-    <zero-md {src}>
-      <template data-append>
-        <!-- prettier-ignore -->
-        <style>
-.markdown-body{box-sizing:border-box;padding:45px;}@media(max-width:767px){.markdown-body{padding:15px;}}
-        </style>
-      </template>
-      <!-- prettier-ignore -->
-      <script type="text/markdown">
-Page not found!
-      </script>
+  <div class="zmdocs-menu">
+    <zero-md src="readme.md" no-shadow on:zero-md-rendered={init}>
+      <template />
     </zero-md>
+  </div>
+  <div class="zmdocs-content">
+    {#if ready}
+      <zero-md {src}>
+        <template data-append>
+          <!-- prettier-ignore -->
+          <style>
+.markdown-body{box-sizing:border-box;padding:45px;}@media(max-width:767px){.markdown-body{padding:15px;}}
+          </style>
+        </template>
+        <!-- prettier-ignore -->
+        <script type="text/markdown">
+Page not found!
+        </script>
+      </zero-md>
+    {/if}
   </div>
 </div>
