@@ -1,6 +1,10 @@
 ## Basic Usage
 
-Test internal [link](#using-your-own-styles).
+Test same page [hash link](#using-your-own-styles).
+
+Test different page [hash link](installation.md#install-in-web-projects).
+
+Test different page [explicit link](?a=installation.md).
 
 ### Display an external markdown file
 

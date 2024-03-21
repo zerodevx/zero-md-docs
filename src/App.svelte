@@ -1,41 +1,45 @@
 <script>
-const baseUrl = location.origin + location.pathname
-const paramName = 'a'
+const searchKey = 'a'
 let links = []
 let title = ''
 let src = ''
 let ready = false
 
 function load() {
-  const file = new URLSearchParams(location.search).get(paramName) || links[0][1]
-  ;[title, src] = links.find((i) => i[1] === file) || ['404', '']
+  const browser = new URL(location.href)
+  const file = browser.searchParams.get(searchKey) || links[0].src
+  ;({ title = '404', src = '' } = links.find((i) => i.src === file) || {})
   const active = 'font-bold'
   for (const link of links) {
-    link[1] === file ? link[2].classList.add(active) : link[2].classList.remove(active)
+    link.src === file ? link.a.classList.add(active) : link.a.classList.remove(active)
   }
 }
 
 function clicked(e) {
   const a = e.composedPath()[0].closest('a')
-  if (a && a.href.startsWith(baseUrl) && a.href.endsWith('.md')) {
-    e.preventDefault()
-    const url = new URL(location.href)
-    const file = a.href.split(baseUrl)[1]
-    file === links[0][1]
-      ? url.searchParams.delete(paramName)
-      : url.searchParams.set(paramName, file)
-    history.pushState({}, '', url.toString())
-    load()
-    scrollTo(0, 0)
+  if (a) {
+    const target = new URL(a.href)
+    if (target.pathname.startsWith(location.pathname) && target.pathname.endsWith('.md')) {
+      e.preventDefault()
+      const browser = new URL(location.href)
+      const file = target.pathname.split(browser.pathname).pop()
+      file === links[0].src
+        ? browser.searchParams.delete(searchKey)
+        : browser.searchParams.set(searchKey, file)
+      browser.hash = target.hash
+      history.pushState({}, '', browser.toString())
+      load()
+      scrollTo(0, 0)
+    }
   }
 }
 
-async function init(e) {
-  links = Array.from(e.target.querySelectorAll('a')).map((a) => [
-    a.text,
-    a.href.split(baseUrl)[1],
+function init(e) {
+  links = Array.from(e.target.querySelectorAll('a')).map((a) => ({
+    title: a.text,
+    src: new URL(a.href).pathname.split(location.pathname).pop(),
     a
-  ])
+  }))
   load()
   ready = true
 }
