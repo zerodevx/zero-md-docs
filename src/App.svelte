@@ -1,4 +1,7 @@
 <script>
+import ZeroMd from 'zero-md'
+import markedAlert from 'https://cdn.jsdelivr.net/npm/marked-alert@2/+esm'
+
 const searchKey = 'a'
 let links = []
 let title = ''
@@ -43,13 +46,24 @@ function init(e) {
   load()
   ready = true
 }
+
+customElements.define(
+  'zero-md',
+  class extends ZeroMd {
+    async load() {
+      await super.load()
+      this.template +=
+        '<style>.markdown-body{box-sizing:border-box;padding:45px;}.markdown-alert{padding:0.25rem 0 0 1rem !important;}@media(max-width:767px){.markdown-body{padding:15px;}}</style>'
+      this.marked.use(markedAlert())
+    }
+  }
+)
 </script>
 
 <svelte:window on:popstate={load} on:click={clicked} />
 
 <svelte:head>
   <title>{title}</title>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@next"></script>
 </svelte:head>
 
 <div class="zmdocs-container">
@@ -61,12 +75,6 @@ function init(e) {
   <div class="zmdocs-content">
     {#if ready}
       <zero-md {src}>
-        <template data-append>
-          <!-- prettier-ignore -->
-          <style>
-.markdown-body{box-sizing:border-box;padding:45px;}@media(max-width:767px){.markdown-body{padding:15px;}}
-          </style>
-        </template>
         <!-- prettier-ignore -->
         <script type="text/markdown">
 Page not found!
