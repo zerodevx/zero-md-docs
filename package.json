@@ -1,6 +1,6 @@
 {
   "name": "zero-md-docs",
-  "version": "1.0.0-next.4",
+  "version": "1.0.0-next.5",
   "description": "Instantly publish markdown from Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "scripts": {
@@ -19,10 +19,11 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.2.2",
-    "prettier-plugin-tailwindcss": "^0.5.12",
+    "prettier-plugin-tailwindcss": "^0.5.13",
     "svelte": "^4.2.12",
-    "tailwindcss": "^3.4.1",
-    "vite": "^5.2.2"
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.6",
+    "zero-md": "^3.0.0-next.8"
   },
   "type": "module",
   "exports": "./dist/index.min.js",
