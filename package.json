@@ -1,6 +1,6 @@
 {
   "name": "zero-md-docs",
-  "version": "1.0.0-next.6",
+  "version": "1.0.0-next.7",
   "description": "Instantly publish markdown from Github docs folder",
   "author": "Jason Lee <jason@zerodevx.com>",
   "scripts": {
@@ -28,7 +28,7 @@
   "type": "module",
   "exports": "./dist/index.min.js",
   "jsdelivr": "./dist/index.min.js",
-  "styles": "./dist/default.css",
+  "style": "./dist/default.css",
   "files": [
     "dist"
   ],
