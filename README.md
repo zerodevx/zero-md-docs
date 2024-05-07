@@ -67,13 +67,14 @@ navigation menu.
 From your Github repo page, go to `Setting > Pages > Source > Deploy from a branch`, then select the
 `/docs` folder.
 
-<!-- prettier-ignore -->
+```
 ░██████╗░█████╗░██╗░░░██╗███████╗██╗
 ██╔════╝██╔══██╗██║░░░██║██╔════╝██║
 ╚█████╗░███████║╚██╗░██╔╝█████╗░░██║
 ░╚═══██╗██╔══██║░╚████╔╝░██╔══╝░░╚═╝
 ██████╔╝██║░░██║░░╚██╔╝░░███████╗██╗
 ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝
+```
 
 ...and voila - your site is now available at `https://<user>.github.io/<repo>/`.
 
