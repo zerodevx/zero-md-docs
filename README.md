@@ -3,7 +3,7 @@
 > Instantly publish markdown from Github docs folder
 
 Elegantly leverage on your Github docs folder as a public-facing documentation website. Super easy
-to use, barely an inconvenience. Inspired by [docsify](https://docsify.js.org).
+to use, barely an inconvenience. Inspired by [`docsify`](https://docsify.js.org).
 
 ## Usage
 
@@ -64,8 +64,8 @@ navigation menu.
 
 ### Publish with Github Pages
 
-From your Github repo page, go to `Setting > Pages > Source > Deploy from a branch`, then select the
-`/docs` folder.
+From your Github repo page, go to `Settings -> Pages`, set `Source` to `Deploy from a branch`, and
+set `Branch` to `/docs`...
 
 ```
 ░██████╗░█████╗░██╗░░░██╗███████╗██╗
