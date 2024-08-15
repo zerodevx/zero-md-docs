@@ -3,7 +3,7 @@ import globals from 'globals'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
+/** @type {import('eslint').Linter.Config[]} */
 export default [
   { ignores: ['dist/', 'temp/'] },
   js.configs.recommended,
