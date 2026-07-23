@@ -1,42 +1,45 @@
+![version](https://img.shields.io/npm/v/zero-md-docs)
+![license](https://img.shields.io/npm/l/zero-md-docs)
+![jsdelivr](https://data.jsdelivr.com/v1/package/npm/zero-md-docs/badge)
+
 # zero-md-docs
 
-> Instantly publish markdown from Github docs folder
+> Instantly publish markdown from Github `docs/` folder
 
-Elegantly leverage on your Github docs folder as a public-facing documentation website. Super easy
-to use, barely an inconvenience. Inspired by [`docsify`](https://docsify.js.org).
+Elegantly leverage on your Github `docs/` folder as a public-facing documentation website. Zero
+build, zero config, zero effort - just drop markdown in `docs/`, get a site for free.
+
+Demo: https://zerodevx.github.io/zero-md/
 
 ## Usage
 
-Structure your `docs/` folder like so:
+Structure your Github `docs/` folder like so:
 
 ```text
-.
-└── docs/
-    ├── readme.md               # TOC (navigation menu)
-    ├── index.html              # Copy from template
-    ├── home.md                 # ...Site pages
-    ├── getting-started.md
-    └── config.md
-    ...
-    └── any-other-page.md
+docs/
+├── index.html          # copy from template below
+├── readme.md           # nav menu (table of contents)
+├── home.md             # site pages...
+├── getting-started.md
+├── config.md
+├── submenu.md
+└── any-other-page.md
 ```
 
-### Copy `index.html`
-
-Copy and paste the following code into `docs/index.html`:
+### Step 1: Add `index.html`
 
 <!-- prettier-ignore -->
 ```html
-<!-- index.html -->
+<!-- docs/index.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Import modules and stylesheet -->
+    <!-- Import from CDN -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md-docs@1"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zero-md-docs@1/dist/default.min.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md-docs@2/dist/index.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zero-md-docs@2/dist/styles.css" />
   </head>
   <body>
     <!-- Declare `app` entry point -->
@@ -45,29 +48,29 @@ Copy and paste the following code into `docs/index.html`:
 </html>
 ```
 
-### Add `readme.md`
+### Step 2: Add `readme.md`
 
-Create `docs/readme.md` containing a table of contents (or site links). This acts as the site
-navigation menu.
+This is your site navigation - a plain markdown list of links.
 
-```text
-<!-- readme.md -->
+```markdown
+<!-- docs/readme.md -->
+
 - [Home](home.md)
 - [Getting Started](getting-started.md)
 - [Configuration](config.md)
-...
+  - [Sub Menu](submenu.md)
 - [External Link](https://example.com/)
 ```
 
 > [!NOTE]  
-> The first link is always the home page.
+> The first link in the list is always treated as the home page.
 
-### Publish with Github Pages
+### Step 3: Publish with Github Pages
 
-From your Github repo page, go to `Settings -> Pages`, set `Source` to `Deploy from a branch`, and
-set `Branch` to `/docs`...
+In your repo, go to **Settings -> Pages**, set **Source** to `Deploy from a branch`, and set
+**Branch** to `/docs`.
 
-```
+```text
 ░██████╗░█████╗░██╗░░░██╗███████╗██╗
 ██╔════╝██╔══██╗██║░░░██║██╔════╝██║
 ╚█████╗░███████║╚██╗░██╔╝█████╗░░██║
@@ -76,7 +79,52 @@ set `Branch` to `/docs`...
 ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝
 ```
 
-...and voila - your site is now available at `https://<user>.github.io/<repo>/`.
+...and voila - your site is now live at `https://<user>.github.io/<repo>/`.
+
+## Development
+
+### Setup
+
+Clone the repository and install dependencies.
+
+```text
+git clone https://github.com/zerodevx/zero-md-docs.git
+cd zero-md-docs
+npm install
+```
+
+Run the dev server.
+
+```text
+npm run dev
+```
+
+Build locally into `dist/`.
+
+```text
+npm run build
+```
+
+### Under the hood
+
+Built with [Svelte](https://svelte.dev/) and [zero-md](https://github.com/zerodevx/zero-md), with
+[Tailwind CSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/) for styling.
+
+### Theming
+
+Project is looking for theme contributions. If you'd like to help, open an issue and let's discuss.
+
+## Contributing
+
+### Bugs and feature requests
+
+Open a new issue or discussion - I'd be stoked to hear from you!
+
+### Raise a PR
+
+Standard Github
+[contribution workflow](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)
+applies.
 
 ## License
 
